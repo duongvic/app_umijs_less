@@ -1,0 +1,24 @@
+{
+  // "parser": "babel-eslint",
+  // "parser": "@babel/eslint-parser",
+  // "parserOptions": {
+  //   "sourceType": "module",
+  //   "allowImportExportEverywhere": false,
+  //   "codeFrame": true
+  //   // "requireConfigFile": false
+  // },
+
+  "extends": ["airbnb", "prettier", "prettier/react", "eslint-config-umi"],
+  "plugins": ["prettier"],
+  "parser": "react-scripts/node_modules/babel-eslint",
+
+  // "extends": "eslint-config-umi",
+  "rules": {
+    "no-debugger": "error",
+    "no-duplicate-imports": "error",
+    "no-dupe-keys": "error",
+    "no-unused-vars": "error",
+    "no-console": "error",
+    "react/jsx-no-duplicate-props": "error"
+  }
+}
