@@ -8,17 +8,35 @@
   //   // "requireConfigFile": false
   // },
 
-  "extends": ["airbnb", "prettier", "prettier/react", "eslint-config-umi"],
-  "plugins": ["prettier"],
-  "parser": "react-scripts/node_modules/babel-eslint",
+  // "extends": ["airbnb", "prettier", "prettier/react", "eslint-config-umi"],
+  // "plugins": ["prettier"],
+  // "parser": "react-scripts/node_modules/babel-eslint",
 
-  // "extends": "eslint-config-umi",
+  // // "extends": "eslint-config-umi",
+
+  "parser": "@babel/eslint-parser",
+  "env": {
+      "browser": true,
+      "es2021": true
+  },
+  "extends": [
+      "plugin:react/recommended",
+      "plugin:react/jsx-runtime",
+      "plugin:testing-library/react",
+      "plugin:jest/all",
+      "eslint-config-umi"
+      
+  ],
+  "parserOptions": {
+      "sourceType": "module"
+  },
   "rules": {
     "no-debugger": "error",
     "no-duplicate-imports": "error",
     "no-dupe-keys": "error",
     "no-unused-vars": "error",
-    "no-console": "error",
+    "no-console": "warn",
     "react/jsx-no-duplicate-props": "error"
   }
+
 }

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^5.1.4",
     "@babel/eslint-parser": "^7.22.5",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@testing-library/jest-dom": "^5.14.1",
@@ -49,6 +50,8 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/preset-react": "^7.22.5",
     "eslint": "^8.43.0",
     "eslint-config-umi": "^1.6.0",
     "eslint-plugin-flowtype": "^8.0.3",
@@ -70,5 +73,7 @@
       "eslint --fix",
       "git add"
     ]
-  }
+  },
+  "lint": "eslint .",
+  "lint:fix": "eslint --fix"
 }
