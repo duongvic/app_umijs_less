@@ -1,56 +1,129 @@
 import { Menu } from 'antd';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import {DashboardOutlined, HomeOutlined, PoweroffOutlined, UnorderedListOutlined, UserOutlined } from '@ant-design/icons';
 
 import './App.less';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
-function getItem(label, key, icon, children, type) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type,
-  };
+function Home() {
+  return (
+    <div>
+      Home Component
+    </div>
+  );
+
 }
-const items = [
-  getItem('Navigation One', 'sub1', <MailOutlined />, [
-    getItem('Item 1', 'g1', null, [getItem('Option 1', '1'), getItem('Option 2', '2')], 'group'),
-    getItem('Item 2', 'g2', null, [getItem('Option 3', '3'), getItem('Option 4', '4')], 'group'),
-  ]),
-  getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
-    getItem('Option 5', '5'),
-    getItem('Option 6', '6'),
-    getItem('Submenu', 'sub3', null, [getItem('Option 7', '7'), getItem('Option 8', '8')]),
-  ]),
-  {
-    type: 'divider',
-  },
-  getItem('Navigation Three', 'sub4', <SettingOutlined />, [
-    getItem('Option 9', '9'),
-    getItem('Option 10', '10'),
-    getItem('Option 11', '11'),
-    getItem('Option 12', '12'),
-  ]),
-  getItem('Group', 'grp', null, [getItem('Option 13', '13'), getItem('Option 14', '14')], 'group'),
-];
+
+function Content() {
+  return (
+    <div>
+      <Routes>
+        <Route path='/' element={ <Home />}></Route>
+        <Route path='/dashboard' element={<div>Dashboard</div>}></Route>
+        <Route path='/activeUsers' element={<div>Active User List</div>}></Route>
+        <Route path='/disabledUsers' element={<div>Disabled User List</div>}></Route>
+        {/* <Route path='/uersList' element={<div>User List</div>}></Route> */}
+        <Route path='/profile' element={<div>Profile</div>}></Route>
+        <Route path='/signout' element={<div>Signout</div>}></Route>
+      </Routes>
+    </div>
+  );
+}
+
+function SideMenu () {
+  const navigate = useNavigate();
+  return (
+    <div style={{ display: 'flex', flexDirection:'row'}}> 
+      <Menu
+        mode='inline'
+        onClick={({ key }) => {
+          if(key ===' signout') {
+            //TODO, sign out feature here
+          }else {
+            navigate(key);
+          }
+        }}
+        defaultSelectedKeys={[window.location.pathname]}
+        items={[
+            { label: "Home", key:"/", icon: <HomeOutlined /> },
+            { label: "Dashboard", key:"/dashboard", icon: <DashboardOutlined /> },
+            { 
+              label: "Users List",
+              key:"/uersList",
+              icon: <UnorderedListOutlined />,
+              children:[
+                { 
+                  label:'Active Users',
+                  key:'/activeUsers'
+                },
+                { 
+                  label:'Disabled Users',
+                  key:'/disabledUsers'
+                }    
+              ]
+            },
+            { label: "Profile", key:"/profile", icon: <UserOutlined /> },
+            { label: "Signout", key:"/signout", icon: <PoweroffOutlined />, danger:true },
+        ]}
+          
+      />
+      </div>
+  )
+}
+  
+  
+function Header () {
+  return (
+    <div 
+      style={{
+        height: 60, 
+        backgroundColor:'lightskyblue', 
+        color:'white',
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center',
+        fontWeight:'bold'
+      }}
+    >
+      Header
+    </div>
+  )
+}
+
+function Footer () {
+  return (
+    <div 
+      style={{
+        height: 60, 
+        backgroundColor:'lightgray', 
+        color:'white',
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center',
+        fontWeight:'bold'
+      }}
+    >
+      Footer
+    </div>
+  )
+}
 
 function App() {
-  const onClick = (e) => {
-    console.log('click ', e);
-  };
+
   return (
-    <div className="App">
-      <Menu
-      onClick={onClick}
-      style={{
-        width: 256,
+    <div 
+      style={{ 
+        display: 'flex',
+         flexDirection:'column', 
+         flex:1,
+         height: '100vh'
       }}
-      defaultSelectedKeys={['1']}
-      defaultOpenKeys={['sub1']}
-      mode="inline"
-      items={items}
-    />
-      
+    >  
+      <Header />
+      <div style={{ display: 'flex', flexDirection:'row', flex:1}}> 
+        <SideMenu />
+        <Content />
+      </div>
+      <Footer />  
     </div>
   );
 }
